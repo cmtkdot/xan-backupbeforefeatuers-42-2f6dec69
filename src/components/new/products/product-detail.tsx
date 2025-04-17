@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, Grid, Col, Title, Text, Tab, TabGroup, TabList, TabPanel, TabPanels, Metric, Bold, Divider } from '@tremor/react';
 import { Badge } from '@/components/ui/badge';
-import { formatCurrency, formatDate, formatShortDate } from '@/utils/format';
+import { formatCurrency, formatDate } from '@/utils/format';
 import { ProductDetail as ProductDetailType } from '@/types/products';
 import { ProductPDFActions } from '@/components/products/ProductPDFActions';
 import { Spinner } from '@/components/ui/spinner';
@@ -268,7 +268,7 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product, isLoading
                         </div>
                         {line.invoice && (
                           <div className="flex justify-between text-xs text-gray-500 mt-1">
-                            <span>{formatShortDate(line.invoice.invoice_date)}</span>
+                            <span>{formatDate(line.invoice.invoice_date)}</span>
                             <span>{line.invoice.status || 'Unknown'}</span>
                             {line.invoice.supabase_pdf_url && (
                               <a 
@@ -309,7 +309,7 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product, isLoading
                         </div>
                         {line.estimate && (
                           <div className="flex justify-between text-xs text-gray-500 mt-1">
-                            <span>{formatShortDate(line.estimate.estimate_date)}</span>
+                            <span>{formatDate(line.estimate.estimate_date)}</span>
                             <span>{line.estimate.status || 'Unknown'}</span>
                             {line.estimate.supabase_pdf_url && (
                               <a 
@@ -414,7 +414,7 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product, isLoading
                         {product.vendorPayments.map((payment, index) => (
                           <tr key={index}>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                              {formatShortDate(payment.date_of_payment)}
+                              {formatDate(payment.date_of_payment)}
                             </td>
                             <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                               {payment.account?.account_name || 'N/A'}
@@ -474,7 +474,7 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product, isLoading
                         <div>
                           <Text className="font-medium">Purchase Order #{product.purchaseOrder.purchase_order_uid}</Text>
                           <Text className="text-sm text-gray-500">
-                            {formatShortDate(product.purchaseOrder.purchase_order_date)} | 
+                            {formatDate(product.purchaseOrder.purchase_order_date)} | 
                             {product.purchaseOrder.account?.account_name || 'Unknown Vendor'}
                           </Text>
                         </div>
@@ -503,7 +503,7 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product, isLoading
                           .map((line, index) => (
                             <div key={index} className="flex justify-between items-center">
                               <Text className="text-sm">
-                                Invoice #{line.invoice?.invoice_uid} | {formatShortDate(line.invoice?.invoice_date)}
+                                Invoice #{line.invoice?.invoice_uid} | {formatDate(line.invoice?.invoice_date)}
                               </Text>
                               <a 
                                 href={line.invoice?.supabase_pdf_url || '#'} 
@@ -529,7 +529,7 @@ export const ProductDetail: React.FC<ProductDetailProps> = ({ product, isLoading
                           .map((line, index) => (
                             <div key={index} className="flex justify-between items-center">
                               <Text className="text-sm">
-                                Estimate #{line.estimate?.estimate_uid} | {formatShortDate(line.estimate?.estimate_date)}
+                                Estimate #{line.estimate?.estimate_uid} | {formatDate(line.estimate?.estimate_date)}
                               </Text>
                               <a 
                                 href={line.estimate?.supabase_pdf_url || '#'} 
